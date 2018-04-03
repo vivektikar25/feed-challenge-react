@@ -4,7 +4,9 @@ The API Endpoint details can be found below.
 
 We'd LOVE for you to write tests!! We also value code which is clean, consistent, and easily understandable.
 
-Once you are done, we can review your code together. Be prepared to explain why you chose to write it the way you did.
+When you're done, be prepared to possibly review this code together and be able explain why you chose to write it the way you did.
+
+Please share your code with us either on GitHub, or if privacy is important to you, there are free private repos with BitBucket (share with leighhalliday@gmail.com).
 
 ## React
 
