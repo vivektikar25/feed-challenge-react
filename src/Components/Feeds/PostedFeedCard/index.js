@@ -1,43 +1,38 @@
 import React from "react";
-import * as sharedService from "./../../../../SharedService/";
-import Request from "./../../../../Utilities/Request/";
+import * as sharedService from "./../../../SharedService/";
+import Request from "./../../../Utilities/Request/";
 
 import { Card, CardHeader, CardText } from "material-ui/Card";
 import CircularProgress from "material-ui/CircularProgress";
 
-class SharedFeedCard extends React.Component {
+class PostedFeedCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       feed: props.feed,
-      cardsSharedUrl: "",
-      showCardsSharedUrlFlag: false,
+      cardsPostContent: "",
+      showCardsPostContentFlag: false,
       showLoader: false
     };
 
     this.handleCardClick = this.handleCardClick.bind(this);
-    this.fetchSharedUrl = this.fetchSharedUrl.bind(this);
   }
-
-  shouldComponentUpdate = (nextProps, nextState) => {
-    return true;
-  };
 
   getFormattedDate = date => {
     let formattedDate = sharedService.getFormattedDate(date);
     return formattedDate;
   };
 
-  fetchSharedUrl = () => {
+  fetchPostContent = () => {
     this.setState({ showLoader: true });
-    let id = this.state.feed.object.split(":")[1];
     let request = new Request();
-    request.fetch(`shares/${id}`, "GET").then(
+    let id = this.state.feed.object.split(":")[1];
+    request.fetch(`posts/${id}`, "GET").then(
       data => {
         this.setState({
           showLoader: false,
-          cardsSharedUrl: data.url,
-          showCardsSharedUrlFlag: true
+          cardsPostContent: data.content,
+          showCardsPostContentFlag: true
         });
       },
       err => {
@@ -47,30 +42,30 @@ class SharedFeedCard extends React.Component {
   };
 
   handleCardClick = () => {
-    if (this.state.showCardsSharedUrlFlag) {
-      this.setState({ showCardsSharedUrlFlag: false });
+    if (this.state.showCardsPostContentFlag) {
+      this.setState({ showCardsPostContentFlag: false });
     } else {
-      if (this.state.cardsSharedUrl) {
-        this.setState({ showCardsSharedUrlFlag: true });
+      if (this.state.cardsPostContent) {
+        this.setState({ showCardsPostContentFlag: true });
       } else {
-        this.fetchSharedUrl();
+        this.fetchPostContent();
       }
     }
   };
 
   render() {
-    let { feed, cardsSharedUrl, showCardsSharedUrlFlag } = this.state;
+    let { feed, cardsPostContent, showCardsPostContentFlag } = this.state;
 
     return (
       <div style={{ margin: "1% 20%" }} onClick={this.handleCardClick}>
-        <Card expanded={showCardsSharedUrlFlag}>
+        <Card expanded={showCardsPostContentFlag}>
           <CardHeader
             style={{ paddingBottom: 5 }}
             title={
               <span>
                 <h3 style={{ marginBottom: 0 }}>
                   {feed.actor} |{" "}
-                  <span style={{ fontSize: 16, fontWeight: 200 }}>Shared</span>
+                  <span style={{ fontSize: 16, fontWeight: 200 }}>Posted</span>
                 </h3>
               </span>
             }
@@ -104,12 +99,7 @@ class SharedFeedCard extends React.Component {
             ""
           )}
           <CardText expandable={true}>
-            <span>
-              Shared:{" "}
-              <a href={cardsSharedUrl} target="_blank">
-                {cardsSharedUrl}
-              </a>
-            </span>
+            <span>Post: {cardsPostContent}</span>
             <span
               style={{
                 color: "rgba(0, 0, 0, 0.54)",
@@ -126,4 +116,4 @@ class SharedFeedCard extends React.Component {
   }
 }
 
-export default SharedFeedCard;
+export default PostedFeedCard;

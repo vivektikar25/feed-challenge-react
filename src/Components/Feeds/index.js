@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "./../Layout";
-import FeedCards from "./FeedCards";
+import SharedFeedCard from "./SharedFeedCard";
+import PostedFeedCard from "./PostedFeedCard";
 import DisplayError from "./../Shared/DisplayError";
 import * as service from "./Service";
 import "./Feeds.css";
@@ -61,7 +62,15 @@ class Feeds extends React.Component {
           return feed.verb === filterFeedsBy;
         }
       })
-      .map(feed => <FeedCards key={feed.id} feed={feed} />);
+      .map(feed => {
+        if (feed.verb === "posted") {
+          return <PostedFeedCard key={feed.id} feed={feed} />;
+        } else if (feed.verb === "shared") {
+          return <SharedFeedCard key={feed.id} feed={feed} />;
+        } else {
+          return null;
+        }
+      });
   };
 
   render() {
