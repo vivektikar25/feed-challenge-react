@@ -66,7 +66,7 @@ class PostedFeedCard extends React.Component {
     let { feed, cardsPostContent, showCardsPostContentFlag } = this.state;
 
     return (
-      <div style={{ margin: "1% 20%" }} onClick={this.handleCardClick}>
+      <div style={{ margin: "1% 20%" }} className="card" onClick={this.handleCardClick}>
         <Card expanded={showCardsPostContentFlag}>
           <CardHeader
             style={{ paddingBottom: 5 }}
@@ -83,6 +83,7 @@ class PostedFeedCard extends React.Component {
             showExpandableButton={false}
           />
           <div
+
             style={{
               padding: "0px 15px",
               fontSize: "small",
