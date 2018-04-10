@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export const dayMap = {
   0: "Sunday",
   1: "Monday",
@@ -22,3 +24,12 @@ export const monthMap = {
   10: "November",
   11: "December"
 };
+
+export const FeedStruct = {
+  actor: PropTypes.string,
+  created_at: PropTypes.string,
+  id: PropTypes.number,
+  object: PropTypes.string,
+  updated_at: PropTypes.string,
+  verb: PropTypes.string
+}

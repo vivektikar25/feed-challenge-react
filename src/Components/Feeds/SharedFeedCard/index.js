@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import * as sharedService from "./../../../SharedService/";
+import * as sharedData from "./../../../SharedData";
 import Request from "./../../../Utilities/Request/";
 
 import { Card, CardHeader, CardText } from "material-ui/Card";
@@ -24,6 +25,7 @@ class SharedFeedCard extends React.Component {
     if (nextProps.feed.id !== prevState.feed.id) {
       return { feed: nextProps.feed }
     }
+    return null
   }
 
   getFormattedDate = date => {
@@ -134,7 +136,7 @@ class SharedFeedCard extends React.Component {
 }
 
 SharedFeedCard.propTypes = {
-  feed: PropTypes.any.isRequired
+  feed: PropTypes.shape(sharedData.FeedStruct).isRequired
 };
 
 export default SharedFeedCard;
