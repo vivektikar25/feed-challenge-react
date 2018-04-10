@@ -12,6 +12,7 @@ class PostedFeedCard extends React.Component {
       feed: props.feed,
       cardsPostContent: "",
       showCardsPostContentFlag: false,
+      filterFeedsBy: props.filterFeedsBy,
       showLoader: false
     };
 

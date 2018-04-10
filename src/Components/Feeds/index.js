@@ -30,6 +30,18 @@ class Feeds extends React.Component {
     this.setState({ hasError: true });
   }
 
+  shouldComponentUpdate = (nextProps, nextState) => {
+    if (
+      nextState.filterFeedsBy !== this.state.filterFeedsBy ||
+      nextState.feedsList !== this.state.feedsList ||
+      nextState.feedsList.length !== this.state.feedsList.length
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   updateFilterFeedsBy = filterFeedsBy => {
     let feedsDisplayList = this.getFeedsToDisplay(
       this.state.feedsList,
@@ -53,13 +65,14 @@ class Feeds extends React.Component {
     );
   };
 
-  getFeedsToDisplay = (feedsList, filterFeedsBy) => {
-    return feedsList
+  getFeedsToDisplay = feedsList => {
+    let filterFeedsBy = this.state.filterFeedsBy;
+    return this.state.feedsList
       .filter(feed => {
         if (filterFeedsBy === "all") {
           return true;
         } else {
-          return feed.verb === filterFeedsBy;
+          return filterFeedsBy === feed.verb;
         }
       })
       .map(feed => {
@@ -84,7 +97,7 @@ class Feeds extends React.Component {
           <div>
             <Layout updateFilterFeedsBy={this.updateFilterFeedsBy} />
             {this.state.feedsList.length ? (
-              this.state.feedsDisplayList
+              this.getFeedsToDisplay()
             ) : (
               <div
                 style={{
