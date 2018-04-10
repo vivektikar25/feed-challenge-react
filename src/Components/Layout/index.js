@@ -1,6 +1,6 @@
 import React from "react";
 import AppBar from "material-ui/AppBar";
-import { APPLICATION_NAME } from "./../../Constants/Constant";
+import { APPLICATION_NAME } from "./../../Constants/";
 
 import Drawer from "material-ui/Drawer";
 import { List, ListItem } from "material-ui/List";
@@ -10,9 +10,16 @@ class Layout extends React.Component {
     super(props);
     this.state = {
       filterFeedsBy: "all",
-      isSidebarOpen: false
+      isSidebarOpen: false,
+      filterFeedsBy: props.filterFeedsBy
     };
   }
+
+  componentWillReceiveProps = nextProps => {
+    if (this.state.filterFeedsBy !== nextProps.filterFeedsBy) {
+      this.setState({ filterFeedsBy: nextProps.filterFeedsBy });
+    }
+  };
 
   openSideBar = () => {
     this.setState({ isSidebarOpen: true });

@@ -1,13 +1,13 @@
-import * as sharedDate from "./../Data/SharedData";
+import * as sharedData from "./../SharedData/";
 
 const getDayByDate = formattedDate => {
   let day = formattedDate.getDay();
-  return sharedDate.dayMap[day];
+  return sharedData.dayMap[day];
 };
 
 const getMonthByDate = formattedDate => {
   let month = formattedDate.getMonth();
-  return sharedDate.monthMap[month];
+  return sharedData.monthMap[month];
 };
 
 export const getFormattedDate = dateStr => {

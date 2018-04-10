@@ -1,17 +1,18 @@
 import React from "react";
 import Layout from "./../Layout";
 import FeedCard from "./FeedCard";
-import "./Activities.css";
-import Request from "./../../Utilities/Request";
+import "./Feeds.css";
+import Request from "./../../Utilities/Request/";
 
 import CircularProgress from "material-ui/CircularProgress";
 
-class Activities extends React.Component {
+class Feeds extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       feedsList: [],
-      filterFeedsBy: props.filterFeedsBy
+      feedsDisplayList: [],
+      filterFeedsBy: "all"
     };
   }
 
@@ -19,35 +20,29 @@ class Activities extends React.Component {
     this.fetchFeeds();
   };
 
-  componentWillReceiveProps = nextProps => {
-    if (this.state.filterFeedsBy !== nextProps.filterFeedsBy) {
-      this.setState({ filterFeedsBy: nextProps.filterFeedsBy });
-    }
-  };
-
   fetchFeeds = () => {
     let request = new Request();
     request.fetch("activities", "GET").then(
       data => {
-        this.setState({ feedsList: data.slice(0, 5) });
+        let feedsDisplayList = this.getFeedsToDisplay(data);
+        this.setState({ feedsList: data, feedsDisplayList });
       },
       err => {}
     );
   };
 
-  displayFeeds = () => {
-    return this.state.feedsList.map(feed => (
-      <FeedCard key={feed.id} feed={feed} />
-    ));
+  getFeedsToDisplay = feedsList => {
+    return feedsList.map(feed => <FeedCard key={feed.id} feed={feed} />);
   };
 
   render() {
+    let { filterFeedsBy } = this.state;
+
     return (
       <div className="activitiesContainer">
-        <Layout />
-
+        <Layout filterFeedsBy={filterFeedsBy} />
         {this.state.feedsList.length ? (
-          this.displayFeeds()
+          this.state.feedsDisplayList
         ) : (
           <div
             style={{
@@ -65,4 +60,4 @@ class Activities extends React.Component {
   }
 }
 
-export default Activities;
+export default Feeds;

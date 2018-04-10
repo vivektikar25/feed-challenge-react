@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import Activities from "./Components/Activities";
+import Activities from "./Components/Feeds";
 
 class App extends Component {
   render() {
