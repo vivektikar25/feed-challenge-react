@@ -4,6 +4,7 @@ import SharedFeedCard from "./SharedFeedCard";
 import PostedFeedCard from "./PostedFeedCard";
 import DisplayError from "./../Shared/DisplayError";
 import * as service from "./Service";
+import * as sharedData from "./../../SharedData";
 import "./Feeds.css";
 import Request from "./../../Utilities/Request/";
 
@@ -102,6 +103,12 @@ class Feeds extends React.Component {
         ) : (
             <div>
               <Layout updateFilterFeedsBy={this.updateFilterFeedsBy} />
+              <div style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                marginTop: "2%"
+              }}><h3 style={{ textDecoration: "underline" }}>{sharedData.feedsLabelMap[filterFeedsBy]}{" "}Feeds</h3></div>
               {this.state.feedsList.length ? (
                 this.getFeedsToDisplay()
               ) : (
