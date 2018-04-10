@@ -1,12 +1,15 @@
 import React, { Component } from "react";
-import Activities from "./components/Activities";
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import Activities from "./Components/Activities";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Activities />
-      </div>
+      <MuiThemeProvider>
+        <div className="App">
+          <Activities />
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
