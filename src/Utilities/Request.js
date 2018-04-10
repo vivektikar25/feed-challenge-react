@@ -6,14 +6,14 @@ class Request {
 
     fetch = (url, type, payload) => {
         const baseUrl = process.env.REACT_APP_API_BASE_URL;
-
         const requestUrl = `${baseUrl}${url}`;
+
         return fetch(requestUrl, {
             method: type,
             headers: this.headers,
             body: payload
         })
-            .then(response => response.data)
+            .then(response => response.json())
             .catch(err => {
                 return Promise.reject(err);
             });

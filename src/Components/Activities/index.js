@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "./../Layout";
 import "./Activities.css";
+import Request from "./../../Utilities/Request";
 
 import { Card, CardHeader, CardText } from 'material-ui/Card';
 import CircularProgress from 'material-ui/CircularProgress';
@@ -9,15 +10,30 @@ class Activities extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      activitiesList: [],
       filterFeedsBy: props.filterFeedsBy,
       isSidebarOpen: false
     }
+  }
+
+  componentDidMount = () => {
+    this.fetchFeeds()
   }
 
   componentWillReceiveProps = nextProps => {
     if (this.state.filterFeedsBy !== nextProps.filterFeedsBy) {
       this.setState({ filterFeedsBy: nextProps.filterFeedsBy });
     }
+  }
+
+  fetchFeeds = () => {
+    let request = new Request();
+    request.fetch("activities", "GET")
+      .then(data => {
+        this.setState({ activitiesList: data })
+      }, err => {
+
+      })
   }
 
   openSideBar = () => {
