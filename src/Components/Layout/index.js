@@ -9,17 +9,9 @@ class Layout extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      filterFeedsBy: "all",
-      isSidebarOpen: false,
-      filterFeedsBy: props.filterFeedsBy
+      isSidebarOpen: false
     };
   }
-
-  componentWillReceiveProps = nextProps => {
-    if (this.state.filterFeedsBy !== nextProps.filterFeedsBy) {
-      this.setState({ filterFeedsBy: nextProps.filterFeedsBy });
-    }
-  };
 
   openSideBar = () => {
     this.setState({ isSidebarOpen: true });
@@ -27,7 +19,8 @@ class Layout extends React.Component {
 
   handleSidebarOptionClick = e => {
     let filterFeedsBy = e.currentTarget.dataset.option;
-    this.setState({ isSidebarOpen: false, filterFeedsBy });
+    this.props.updateFilterFeedsBy(filterFeedsBy);
+    this.setState({ isSidebarOpen: false });
   };
 
   render() {
@@ -54,13 +47,13 @@ class Layout extends React.Component {
             />
             <ListItem
               onClick={this.handleSidebarOptionClick}
-              data-option="share"
+              data-option="shared"
               primaryText="Shared"
               leftIcon={<i className="material-icons">screen_share</i>}
             />
             <ListItem
               onClick={this.handleSidebarOptionClick}
-              data-option="post"
+              data-option="posted"
               primaryText="Posts"
               leftIcon={<i className="material-icons">local_post_office</i>}
             />

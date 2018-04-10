@@ -2,7 +2,7 @@ import React from "react";
 import SharedFeedCard from "./SharedFeedCard";
 import PostedFeedCard from "./PostedFeedCard";
 
-class FeedCard extends React.Component {
+class FeedCards extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,4 +26,4 @@ class FeedCard extends React.Component {
   }
 }
 
-export default FeedCard;
+export default FeedCards;

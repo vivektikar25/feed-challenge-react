@@ -19,6 +19,8 @@ class SharedFeedCard extends React.Component {
     this.fetchSharedUrl = this.fetchSharedUrl.bind(this);
   }
 
+  shouldComponentUpdate = (nextProps, nextState) => {};
+
   getFormattedDate = date => {
     let formattedDate = sharedService.getFormattedDate(date);
     return formattedDate;

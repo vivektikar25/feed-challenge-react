@@ -1,10 +1,14 @@
 import React from "react";
 import Layout from "./../Layout";
-import FeedCard from "./FeedCard";
+import FeedCards from "./FeedCards";
+import DisplayError from "./../Shared/DisplayError";
+import * as service from "./Service";
 import "./Feeds.css";
 import Request from "./../../Utilities/Request/";
 
 import CircularProgress from "material-ui/CircularProgress";
+import Snackbar from "material-ui/Snackbar";
+import RaisedButton from "material-ui/RaisedButton";
 
 class Feeds extends React.Component {
   constructor(props) {
@@ -12,7 +16,8 @@ class Feeds extends React.Component {
     this.state = {
       feedsList: [],
       feedsDisplayList: [],
-      filterFeedsBy: "all"
+      filterFeedsBy: "all",
+      hasError: false
     };
   }
 
@@ -20,19 +25,43 @@ class Feeds extends React.Component {
     this.fetchFeeds();
   };
 
+  componentDidCatch(error, info) {
+    this.setState({ hasError: true });
+  }
+
+  updateFilterFeedsBy = filterFeedsBy => {
+    let feedsDisplayList = this.getFeedsToDisplay(
+      this.state.feedsList,
+      filterFeedsBy
+    );
+    this.setState({ filterFeedsBy, feedsDisplayList });
+  };
+
   fetchFeeds = () => {
     let request = new Request();
     request.fetch("activities", "GET").then(
       data => {
-        let feedsDisplayList = this.getFeedsToDisplay(data);
-        this.setState({ feedsList: data, feedsDisplayList });
+        let feedsList = service.getFeedsList(data);
+        let feedsDisplayList = this.getFeedsToDisplay(
+          feedsList,
+          this.state.filterFeedsBy
+        );
+        this.setState({ feedsList: feedsList, feedsDisplayList });
       },
       err => {}
     );
   };
 
-  getFeedsToDisplay = feedsList => {
-    return feedsList.map(feed => <FeedCard key={feed.id} feed={feed} />);
+  getFeedsToDisplay = (feedsList, filterFeedsBy) => {
+    return feedsList
+      .filter(feed => {
+        if (filterFeedsBy === "all") {
+          return true;
+        } else {
+          return feed.verb === filterFeedsBy;
+        }
+      })
+      .map(feed => <FeedCards key={feed.id} feed={feed} />);
   };
 
   render() {
@@ -40,19 +69,25 @@ class Feeds extends React.Component {
 
     return (
       <div className="activitiesContainer">
-        <Layout filterFeedsBy={filterFeedsBy} />
-        {this.state.feedsList.length ? (
-          this.state.feedsDisplayList
+        {this.state.hasError ? (
+          <DisplayError message="Opps | Something went wrong" />
         ) : (
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              marginTop: "25%"
-            }}
-          >
-            <CircularProgress size={60} thickness={6} />
+          <div>
+            <Layout updateFilterFeedsBy={this.updateFilterFeedsBy} />
+            {this.state.feedsList.length ? (
+              this.state.feedsDisplayList
+            ) : (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginTop: "25%"
+                }}
+              >
+                <CircularProgress size={60} thickness={6} />
+              </div>
+            )}
           </div>
         )}
       </div>
