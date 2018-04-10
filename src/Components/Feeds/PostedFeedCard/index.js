@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import * as sharedService from "./../../../SharedService/";
 import Request from "./../../../Utilities/Request/";
 
@@ -12,7 +13,6 @@ class PostedFeedCard extends React.Component {
       feed: props.feed,
       cardsPostContent: "",
       showCardsPostContentFlag: false,
-      filterFeedsBy: props.filterFeedsBy,
       showLoader: false
     };
 
@@ -99,22 +99,30 @@ class PostedFeedCard extends React.Component {
           ) : (
             ""
           )}
-          <CardText expandable={true}>
-            <span>Post: {cardsPostContent}</span>
-            <span
-              style={{
-                color: "rgba(0, 0, 0, 0.54)",
-                display: "block",
-                fontSize: 14
-              }}
-            >
-              Updated: {this.getFormattedDate(feed.updated_at)}
-            </span>
-          </CardText>
+          {cardsPostContent ? (
+            <CardText expandable={true}>
+              <span>Post: {cardsPostContent}</span>
+              <span
+                style={{
+                  color: "rgba(0, 0, 0, 0.54)",
+                  display: "block",
+                  fontSize: 14
+                }}
+              >
+                Updated: {this.getFormattedDate(feed.updated_at)}
+              </span>
+            </CardText>
+          ) : (
+            ""
+          )}
         </Card>
       </div>
     );
   }
 }
+
+PostedFeedCard.propTypes = {
+  feed: PropTypes.any.isRequired
+};
 
 export default PostedFeedCard;

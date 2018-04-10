@@ -33,6 +33,7 @@ class Feeds extends React.Component {
   shouldComponentUpdate = (nextProps, nextState) => {
     if (
       nextState.filterFeedsBy !== this.state.filterFeedsBy ||
+      nextState.hasError !== this.state.hasError ||
       nextState.feedsList !== this.state.feedsList ||
       nextState.feedsList.length !== this.state.feedsList.length
     ) {
@@ -90,7 +91,12 @@ class Feeds extends React.Component {
     let { filterFeedsBy } = this.state;
 
     return (
-      <div className="activitiesContainer">
+      <div
+        className="activitiesContainer"
+        style={{
+          marginTop: 100
+        }}
+      >
         {this.state.hasError ? (
           <DisplayError message="Opps | Something went wrong" />
         ) : (

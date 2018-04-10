@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import * as sharedService from "./../../../SharedService/";
 import Request from "./../../../Utilities/Request/";
 
@@ -103,27 +104,35 @@ class SharedFeedCard extends React.Component {
           ) : (
             ""
           )}
-          <CardText expandable={true}>
-            <span>
-              Shared:{" "}
-              <a href={cardsSharedUrl} target="_blank">
-                {cardsSharedUrl}
-              </a>
-            </span>
-            <span
-              style={{
-                color: "rgba(0, 0, 0, 0.54)",
-                display: "block",
-                fontSize: 14
-              }}
-            >
-              Updated: {this.getFormattedDate(feed.updated_at)}
-            </span>
-          </CardText>
+          {this.state.cardsSharedUrl ? (
+            <CardText expandable={true}>
+              <span>
+                Shared:{" "}
+                <a href={cardsSharedUrl} target="_blank">
+                  {cardsSharedUrl}
+                </a>
+              </span>
+              <span
+                style={{
+                  color: "rgba(0, 0, 0, 0.54)",
+                  display: "block",
+                  fontSize: 14
+                }}
+              >
+                Updated: {this.getFormattedDate(feed.updated_at)}
+              </span>
+            </CardText>
+          ) : (
+            ""
+          )}
         </Card>
       </div>
     );
   }
 }
+
+SharedFeedCard.propTypes = {
+  feed: PropTypes.any.isRequired
+};
 
 export default SharedFeedCard;

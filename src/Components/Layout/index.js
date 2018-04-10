@@ -27,6 +27,12 @@ class Layout extends React.Component {
     return (
       <div>
         <AppBar
+          style={{
+            overflow: "hidden",
+            position: "fixed",
+            top: 0,
+            width: "100%"
+          }}
           title={APPLICATION_NAME}
           iconClassNameRight="muidocs-icon-navigation-expand-more"
           onClick={this.openSideBar}
