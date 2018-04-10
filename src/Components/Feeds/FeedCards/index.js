@@ -10,6 +10,12 @@ class FeedCards extends React.Component {
     };
   }
 
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.feed.id !== this.state.feed.id) {
+      this.setState({ feed: nextProps.feed });
+    }
+  };
+
   getFeedCard = feed => {
     if (feed.verb === "posted") {
       return <PostedFeedCard feed={feed} />;
