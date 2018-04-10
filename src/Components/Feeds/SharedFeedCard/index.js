@@ -20,9 +20,11 @@ class SharedFeedCard extends React.Component {
     this.fetchSharedUrl = this.fetchSharedUrl.bind(this);
   }
 
-  shouldComponentUpdate = (nextProps, nextState) => {
-    return true;
-  };
+  static getDerivedStateFromProps = (nextProps, prevState) => {
+    if (nextProps.feed.id !== prevState.feed.id) {
+      return { feed: nextProps.feed }
+    }
+  }
 
   getFormattedDate = date => {
     let formattedDate = sharedService.getFormattedDate(date);
@@ -102,8 +104,8 @@ class SharedFeedCard extends React.Component {
               <CircularProgress />
             </div>
           ) : (
-            ""
-          )}
+              ""
+            )}
           {this.state.cardsSharedUrl ? (
             <CardText expandable={true}>
               <span>
@@ -123,8 +125,8 @@ class SharedFeedCard extends React.Component {
               </span>
             </CardText>
           ) : (
-            ""
-          )}
+              ""
+            )}
         </Card>
       </div>
     );

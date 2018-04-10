@@ -19,6 +19,12 @@ class PostedFeedCard extends React.Component {
     this.handleCardClick = this.handleCardClick.bind(this);
   }
 
+  static getDerivedStateFromProps = (nextProps, prevState) => {
+    if (nextProps.feed.id !== prevState.feed.id) {
+      return { feed: nextProps.feed }
+    }
+  }
+
   getFormattedDate = date => {
     let formattedDate = sharedService.getFormattedDate(date);
     return formattedDate;
@@ -97,8 +103,8 @@ class PostedFeedCard extends React.Component {
               <CircularProgress />
             </div>
           ) : (
-            ""
-          )}
+              ""
+            )}
           {cardsPostContent ? (
             <CardText expandable={true}>
               <span>Post: {cardsPostContent}</span>
@@ -113,8 +119,8 @@ class PostedFeedCard extends React.Component {
               </span>
             </CardText>
           ) : (
-            ""
-          )}
+              ""
+            )}
         </Card>
       </div>
     );
