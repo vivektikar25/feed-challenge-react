@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import Activities from "./Components/Activities";
 
 class App extends Component {
