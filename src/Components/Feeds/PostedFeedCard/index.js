@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import DisplayPostCard from "./DisplayPostCard/";
+import DisplayError from "./../../Shared/DisplayError";
 import * as sharedData from "./../../../SharedData";
 import Request from "./../../../Utilities/Request/";
-
 
 class PostedFeedCard extends React.Component {
   constructor(props) {
@@ -12,7 +12,8 @@ class PostedFeedCard extends React.Component {
       feed: props.feed,
       cardsPostContent: "",
       showCardsPostContentFlag: false,
-      showLoader: false
+      showLoader: false,
+      showError: false
     };
 
     this.handleCardClick = this.handleCardClick.bind(this);
@@ -20,10 +21,10 @@ class PostedFeedCard extends React.Component {
 
   static getDerivedStateFromProps = (nextProps, prevState) => {
     if (nextProps.feed.id !== prevState.feed.id) {
-      return { feed: nextProps.feed }
+      return { feed: nextProps.feed };
     }
-    return null
-  }
+    return null;
+  };
 
   fetchPostContent = () => {
     this.setState({ showLoader: true });
@@ -38,7 +39,7 @@ class PostedFeedCard extends React.Component {
         });
       },
       err => {
-        this.setState({ showLoader: false });
+        this.setState({ showLoader: false, showError: true });
       }
     );
   };
@@ -56,7 +57,12 @@ class PostedFeedCard extends React.Component {
   };
 
   render() {
-    let { feed, cardsPostContent, showCardsPostContentFlag } = this.state;
+    let {
+      feed,
+      cardsPostContent,
+      showCardsPostContentFlag,
+      showError
+    } = this.state;
 
     return (
       <div style={{ margin: "1% 20%" }} onClick={this.handleCardClick}>
@@ -64,7 +70,9 @@ class PostedFeedCard extends React.Component {
           feed={feed}
           cardsPostContent={cardsPostContent}
           showCardsPostContentFlag={showCardsPostContentFlag}
-          showLoader={this.state.showLoader} />
+          showLoader={this.state.showLoader}
+        />
+        {showError ? <DisplayError message="Sorry unable to show post" /> : ""}
       </div>
     );
   }

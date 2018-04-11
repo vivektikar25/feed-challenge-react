@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import DisplayError from "./../../Shared/DisplayError";
 import * as sharedData from "./../../../SharedData";
 import Request from "./../../../Utilities/Request/";
 import DisplaySharedCard from "./DisplaySharedCard";
@@ -11,7 +12,8 @@ class SharedFeedCard extends React.Component {
       feed: props.feed,
       cardsSharedUrl: "",
       showCardsSharedUrlFlag: false,
-      showLoader: false
+      showLoader: false,
+      showError: false
     };
 
     this.handleCardClick = this.handleCardClick.bind(this);
@@ -20,10 +22,10 @@ class SharedFeedCard extends React.Component {
 
   static getDerivedStateFromProps = (nextProps, prevState) => {
     if (nextProps.feed.id !== prevState.feed.id) {
-      return { feed: nextProps.feed }
+      return { feed: nextProps.feed };
     }
-    return null
-  }
+    return null;
+  };
 
   fetchSharedUrl = () => {
     this.setState({ showLoader: true });
@@ -38,7 +40,7 @@ class SharedFeedCard extends React.Component {
         });
       },
       err => {
-        this.setState({ showLoader: false });
+        this.setState({ showLoader: false, showError: true });
       }
     );
   };
@@ -56,7 +58,12 @@ class SharedFeedCard extends React.Component {
   };
 
   render() {
-    let { feed, cardsSharedUrl, showCardsSharedUrlFlag } = this.state;
+    let {
+      feed,
+      cardsSharedUrl,
+      showCardsSharedUrlFlag,
+      showError
+    } = this.state;
 
     return (
       <div style={{ margin: "1% 20%" }} onClick={this.handleCardClick}>
@@ -64,7 +71,13 @@ class SharedFeedCard extends React.Component {
           feed={feed}
           cardsSharedUrl={cardsSharedUrl}
           showCardsSharedUrlFlag={showCardsSharedUrlFlag}
-          showLoader={this.state.showLoader} />
+          showLoader={this.state.showLoader}
+        />
+        {showError ? (
+          <DisplayError message="Sorry unable to show shared url" />
+        ) : (
+          ""
+        )}
       </div>
     );
   }
