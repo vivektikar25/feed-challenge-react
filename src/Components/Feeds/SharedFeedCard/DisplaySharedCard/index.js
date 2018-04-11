@@ -28,27 +28,13 @@ const DisplaySharedCard = props => {
         actAsExpander={true}
         showExpandableButton={false}
       />
-      <div
-        style={{
-          padding: "0px 15px",
-          fontSize: "small",
-          fontWeight: 100,
-          paddingBottom: 10
-        }}
-      >
+      <div className={"actor-bio"}>
         {props.feed.actor} is an English writer and social critic. He created
         some of the world's best-known fictional characters and is regarded by
         many as the greatest novelist.
       </div>
       {props.showLoader ? (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            paddingBottom: "5%"
-          }}
-        >
+        <div className={"loader"}>
           <CircularProgress />
         </div>
       ) : (
@@ -62,40 +48,13 @@ const DisplaySharedCard = props => {
               {props.cardsSharedUrl}
             </a>
           </span>
-          <span
-            style={{
-              color: "rgba(0, 0, 0, 0.54)",
-              display: "block",
-              marginBottom: "5px",
-              fontSize: 14
-            }}
-          >
+          <span className={"feed-updated-date"}>
             Updated: {getFormattedDate(props.feed.updated_at)}
           </span>
-          <span
-            style={{
-              color: "#3636d6",
-              textDecoration: "underline",
-              cursor: "pointer",
-              fontSize: "small",
-              fontWeight: 100
-            }}
-          >
-            show less
-          </span>
+          <span className={"feed-card-show-less"}>show less</span>
         </CardText>
       ) : (
-        <div
-          style={{
-            padding: "0px 15px",
-            fontSize: "small",
-            fontWeight: 100,
-            paddingBottom: 10,
-            color: "#3636d6",
-            textDecoration: "underline",
-            cursor: "pointer"
-          }}
-        >
+        <div className={"feed-card-show-more"}>
           {!props.showLoader ? "show more" : ""}
         </div>
       )}

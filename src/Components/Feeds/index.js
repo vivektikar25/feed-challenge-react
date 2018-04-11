@@ -90,12 +90,7 @@ class Feeds extends React.Component {
     let { filterFeedsBy } = this.state;
 
     return (
-      <div
-        className="activitiesContainer"
-        style={{
-          marginTop: 100
-        }}
-      >
+      <div>
         {this.state.hasError ? (
           <DisplayError message="Opps | Something went wrong" />
         ) : (
