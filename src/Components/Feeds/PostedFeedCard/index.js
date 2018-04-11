@@ -59,7 +59,7 @@ class PostedFeedCard extends React.Component {
     let { feed, cardsPostContent, showCardsPostContentFlag } = this.state;
 
     return (
-      <div style={{ margin: "1% 20%" }} className="card" onClick={this.handleCardClick}>
+      <div style={{ margin: "1% 20%" }} onClick={this.handleCardClick}>
         <DisplayPostCard
           feed={feed}
           cardsPostContent={cardsPostContent}
