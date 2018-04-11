@@ -86,10 +86,10 @@ class Feeds extends React.Component {
         ) : (
           <div>
             <Layout updateFilterFeedsBy={this.updateFilterFeedsBy} />
-            <div className={"heading"}>
-              <h3 style={{ textDecoration: "underline" }}>
+            <div className={"heading-placement"}>
+              <span className={"heading"}>
                 {sharedData.feedsLabelMap[filterFeedsBy]} Feeds
-              </h3>
+              </span>
             </div>
             {feedsList.length ? (
               this.getFeedsToDisplay()
