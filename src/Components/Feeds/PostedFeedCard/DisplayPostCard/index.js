@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import * as sharedService from "./../../../../SharedService/";
+import * as sharedData from "./../../../../SharedData";
 
 import { Card, CardHeader, CardText } from "material-ui/Card";
 import CircularProgress from "material-ui/CircularProgress";
@@ -97,4 +98,10 @@ const DisplayPostCard = props => {
   );
 };
 
+DisplayPostCard.propTypes = {
+  feed: PropTypes.shape(sharedData.FeedStruct).isRequired,
+  cardsPostContent: PropTypes.string.isRequired,
+  showCardsPostContentFlag: PropTypes.bool.isRequired,
+  showLoader: PropTypes.bool.isRequired
+};
 export default DisplayPostCard;

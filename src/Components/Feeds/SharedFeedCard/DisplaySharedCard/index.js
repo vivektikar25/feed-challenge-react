@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import * as sharedService from "./../../../../SharedService/";
+import * as sharedData from "./../../../../SharedData";
 
 import { Card, CardHeader, CardText } from "material-ui/Card";
 import CircularProgress from "material-ui/CircularProgress";
@@ -100,6 +101,13 @@ const DisplaySharedCard = props => {
       )}
     </Card>
   );
+};
+
+DisplaySharedCard.propTypes = {
+  feed: PropTypes.shape(sharedData.FeedStruct).isRequired,
+  cardsSharedUrl: PropTypes.string.isRequired,
+  showCardsSharedUrlFlag: PropTypes.bool.isRequired,
+  showLoader: PropTypes.bool.isRequired
 };
 
 export default DisplaySharedCard;
