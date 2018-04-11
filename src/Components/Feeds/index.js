@@ -14,7 +14,6 @@ class Feeds extends React.Component {
     super(props);
     this.state = {
       feedsList: [],
-      feedsDisplayList: [],
       filterFeedsBy: "all",
       hasError: false
     };
@@ -42,11 +41,7 @@ class Feeds extends React.Component {
   };
 
   updateFilterFeedsBy = filterFeedsBy => {
-    let feedsDisplayList = this.getFeedsToDisplay(
-      this.state.feedsList,
-      filterFeedsBy
-    );
-    this.setState({ filterFeedsBy, feedsDisplayList });
+    this.setState({ filterFeedsBy });
   };
 
   fetchFeeds = () => {
@@ -54,11 +49,7 @@ class Feeds extends React.Component {
     request.fetch("activities", "GET").then(
       data => {
         let feedsList = service.getFeedsList(data);
-        let feedsDisplayList = this.getFeedsToDisplay(
-          feedsList,
-          this.state.filterFeedsBy
-        );
-        this.setState({ feedsList: feedsList, feedsDisplayList });
+        this.setState({ feedsList: feedsList });
       },
       err => {}
     );
