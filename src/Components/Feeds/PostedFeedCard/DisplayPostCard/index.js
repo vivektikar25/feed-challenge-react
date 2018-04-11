@@ -39,6 +39,7 @@ const DisplayPostCard = (props) => {
                 {props.feed.actor} is an English poet, playwright and actor, widely
             regarded as the greatest writer in the English language.
           </div>
+
             {props.showLoader ? (
                 <div
                     style={{
@@ -53,21 +54,35 @@ const DisplayPostCard = (props) => {
             ) : (
                     ""
                 )}
-            {props.cardsPostContent ? (
+            {props.showCardsPostContentFlag ? (
+
                 <CardText expandable={true}>
                     <span>Post: {props.cardsPostContent}</span>
                     <span
                         style={{
                             color: "rgba(0, 0, 0, 0.54)",
                             display: "block",
+                            marginBottom: "5px",
                             fontSize: 14
                         }}
                     >
                         Updated: {getFormattedDate(props.feed.updated_at)}
                     </span>
+                    <span>
+                        <a href="#">show less</a>
+                    </span>
                 </CardText>
+
             ) : (
-                    ""
+                    <div
+                        style={{
+                            padding: "0px 15px",
+                            fontSize: "small",
+                            fontWeight: 100,
+                            paddingBottom: 10
+                        }}>
+                        {!props.showLoader ? <a href="#">show more</a> : ""}
+                    </div>
                 )}
         </Card>
     )

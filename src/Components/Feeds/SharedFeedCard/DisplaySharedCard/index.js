@@ -51,7 +51,7 @@ const DisplaySharedCard = (props) => {
             ) : (
                     ""
                 )}
-            {props.cardsSharedUrl ? (
+            {props.showCardsSharedUrlFlag ? (
                 <CardText expandable={true}>
                     <span>
                         Shared:{" "}
@@ -63,14 +63,26 @@ const DisplaySharedCard = (props) => {
                         style={{
                             color: "rgba(0, 0, 0, 0.54)",
                             display: "block",
+                            marginBottom: "5px",
                             fontSize: 14
                         }}
                     >
                         Updated: {getFormattedDate(props.feed.updated_at)}
                     </span>
+                    <span>
+                        <a href="#">show less</a>
+                    </span>
                 </CardText>
             ) : (
-                    ""
+                    <div
+                        style={{
+                            padding: "0px 15px",
+                            fontSize: "small",
+                            fontWeight: 100,
+                            paddingBottom: 10
+                        }}>
+                        {!props.showLoader ? <a href="#">show more</a> : ""}
+                    </div>
                 )}
         </Card>
     )
