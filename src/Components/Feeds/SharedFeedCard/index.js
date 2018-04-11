@@ -66,7 +66,7 @@ class SharedFeedCard extends React.Component {
     } = this.state;
 
     return (
-      <div style={{ margin: "1% 20%" }} onClick={this.handleCardClick}>
+      <div className={"feed-card"} onClick={this.handleCardClick}>
         <DisplaySharedCard
           feed={feed}
           cardsSharedUrl={cardsSharedUrl}

@@ -5,7 +5,6 @@ import PostedFeedCard from "./PostedFeedCard";
 import DisplayError from "./../Shared/DisplayError";
 import * as service from "./Service";
 import * as sharedData from "./../../SharedData";
-import "./Feeds.css";
 import Request from "./../../Utilities/Request/";
 
 import CircularProgress from "material-ui/CircularProgress";
@@ -96,14 +95,7 @@ class Feeds extends React.Component {
         ) : (
           <div>
             <Layout updateFilterFeedsBy={this.updateFilterFeedsBy} />
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                marginTop: "2%"
-              }}
-            >
+            <div className={"heading"}>
               <h3 style={{ textDecoration: "underline" }}>
                 {sharedData.feedsLabelMap[filterFeedsBy]} Feeds
               </h3>
@@ -111,14 +103,7 @@ class Feeds extends React.Component {
             {this.state.feedsList.length ? (
               this.getFeedsToDisplay()
             ) : (
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginTop: "25%"
-                }}
-              >
+              <div className={"app-loader"}>
                 <CircularProgress size={60} thickness={6} />
               </div>
             )}
