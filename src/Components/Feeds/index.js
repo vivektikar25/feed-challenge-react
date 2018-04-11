@@ -77,11 +77,11 @@ class Feeds extends React.Component {
   };
 
   render() {
-    let { filterFeedsBy } = this.state;
+    let { filterFeedsBy, hasError, feedsList } = this.state;
 
     return (
       <div style={{ backgroundColor: "#fdfdfd" }}>
-        {this.state.hasError ? (
+        {hasError ? (
           <DisplayError message="Opps | Something went wrong" />
         ) : (
           <div>
@@ -91,7 +91,7 @@ class Feeds extends React.Component {
                 {sharedData.feedsLabelMap[filterFeedsBy]} Feeds
               </h3>
             </div>
-            {this.state.feedsList.length ? (
+            {feedsList.length ? (
               this.getFeedsToDisplay()
             ) : (
               <div className={"app-loader"}>

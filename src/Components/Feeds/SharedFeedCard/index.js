@@ -62,7 +62,8 @@ class SharedFeedCard extends React.Component {
       feed,
       cardsSharedUrl,
       showCardsSharedUrlFlag,
-      showError
+      showError,
+      showLoader
     } = this.state;
 
     return (
@@ -71,7 +72,7 @@ class SharedFeedCard extends React.Component {
           feed={feed}
           cardsSharedUrl={cardsSharedUrl}
           showCardsSharedUrlFlag={showCardsSharedUrlFlag}
-          showLoader={this.state.showLoader}
+          showLoader={showLoader}
         />
         {showError ? (
           <DisplayError message="Sorry unable to show shared url" />

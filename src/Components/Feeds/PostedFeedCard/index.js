@@ -61,7 +61,8 @@ class PostedFeedCard extends React.Component {
       feed,
       cardsPostContent,
       showCardsPostContentFlag,
-      showError
+      showError,
+      showLoader
     } = this.state;
 
     return (
@@ -70,7 +71,7 @@ class PostedFeedCard extends React.Component {
           feed={feed}
           cardsPostContent={cardsPostContent}
           showCardsPostContentFlag={showCardsPostContentFlag}
-          showLoader={this.state.showLoader}
+          showLoader={showLoader}
         />
         {showError ? <DisplayError message="Sorry unable to show post" /> : ""}
       </div>
