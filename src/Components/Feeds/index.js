@@ -61,7 +61,7 @@ class Feeds extends React.Component {
         );
         this.setState({ feedsList: feedsList, feedsDisplayList });
       },
-      err => { }
+      err => {}
     );
   };
 
@@ -99,30 +99,36 @@ class Feeds extends React.Component {
         {this.state.hasError ? (
           <DisplayError message="Opps | Something went wrong" />
         ) : (
-            <div>
-              <Layout updateFilterFeedsBy={this.updateFilterFeedsBy} />
-              <div style={{
+          <div>
+            <Layout updateFilterFeedsBy={this.updateFilterFeedsBy} />
+            <div
+              style={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 marginTop: "2%"
-              }}><h3 style={{ textDecoration: "underline" }}>{sharedData.feedsLabelMap[filterFeedsBy]}{" "}Feeds</h3></div>
-              {this.state.feedsList.length ? (
-                this.getFeedsToDisplay()
-              ) : (
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      marginTop: "25%"
-                    }}
-                  >
-                    <CircularProgress size={60} thickness={6} />
-                  </div>
-                )}
+              }}
+            >
+              <h3 style={{ textDecoration: "underline" }}>
+                {sharedData.feedsLabelMap[filterFeedsBy]} Feeds
+              </h3>
             </div>
-          )}
+            {this.state.feedsList.length ? (
+              this.getFeedsToDisplay()
+            ) : (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginTop: "25%"
+                }}
+              >
+                <CircularProgress size={60} thickness={6} />
+              </div>
+            )}
+          </div>
+        )}
       </div>
     );
   }

@@ -32,10 +32,10 @@ export const FeedStruct = {
   object: PropTypes.string,
   updated_at: PropTypes.string,
   verb: PropTypes.string
-}
+};
 
 export const feedsLabelMap = {
   all: "",
   shared: "Shared",
   posted: "Posted"
-}
+};
