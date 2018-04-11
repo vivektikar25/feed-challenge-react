@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import Activities from "./Components/Feeds";
+import Feeds from "./Components/Feeds";
 
 class App extends Component {
   render() {
     return (
       <MuiThemeProvider>
         <div className="App">
-          <Activities />
+          <Feeds />
         </div>
       </MuiThemeProvider>
     );
