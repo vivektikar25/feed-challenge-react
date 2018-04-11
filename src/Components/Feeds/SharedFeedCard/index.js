@@ -1,12 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import * as sharedService from "./../../../SharedService/";
 import * as sharedData from "./../../../SharedData";
 import Request from "./../../../Utilities/Request/";
 import DisplaySharedCard from "./DisplaySharedCard";
-
-import { Card, CardHeader, CardText } from "material-ui/Card";
-import CircularProgress from "material-ui/CircularProgress";
 
 class SharedFeedCard extends React.Component {
   constructor(props) {

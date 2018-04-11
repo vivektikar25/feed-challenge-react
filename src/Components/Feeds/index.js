@@ -9,8 +9,6 @@ import "./Feeds.css";
 import Request from "./../../Utilities/Request/";
 
 import CircularProgress from "material-ui/CircularProgress";
-import Snackbar from "material-ui/Snackbar";
-import RaisedButton from "material-ui/RaisedButton";
 
 class Feeds extends React.Component {
   constructor(props) {
